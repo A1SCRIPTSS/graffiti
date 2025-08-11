@@ -111,13 +111,12 @@ Add the following items to your `ox_inventory/data/items.lua` or your item confi
 ### Gang Territory System
 - Place gang-specific graffiti to claim territory
 - Defend your turf by removing enemy tags
-- Territory control affects gang reputation and influence
 
 ## 👑 Admin Commands
 
 | Command | Description | Permission |
 |---------|-------------|------------|
-| `/cleargraffiti` | Clears all graffiti from the map | Admin only |
+| `/cleargraffiti` | Clears graffiti from the map | Admin only |
 | `/spawnspraycan [type]` | Spawn a custom spray can | Admin only |
 
 ## 🛠️ Configuration
@@ -137,12 +136,9 @@ All configuration options are located in `config.lua`. You can customize:
 ### Gang Settings
 - Define which gangs can use specific sprays
 - Set minimum gang members required to protect territory
-- Configure territory claim mechanics
 
 ### Restrictions
 - Set blacklisted zones (police stations, hospitals, etc.)
-- Configure placement restrictions
-- Adjust removal permissions
 
 ## 🎨 Adding Custom Sprays
 

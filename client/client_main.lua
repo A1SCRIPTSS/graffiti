@@ -158,7 +158,6 @@ RegisterNetEvent('qb-graffiti:client:placeGraffiti', function(model, slot, metad
     end
 
     if information then
-        -- Check gang requirements
         if information.gang then
             if not PlayerData.gang or PlayerData.gang.name ~= information.gang then
                 return lib.notify({
@@ -168,7 +167,6 @@ RegisterNetEvent('qb-graffiti:client:placeGraffiti', function(model, slot, metad
             end
         end
 
-        -- Enhanced gang territory control check
         local territoryRadius = 50.0
         local canPlace, errorMessage = CanPlaceGangGraffiti(
             PlayerData.gang and PlayerData.gang.name or nil, 
@@ -193,7 +191,6 @@ RegisterNetEvent('qb-graffiti:client:placeGraffiti', function(model, slot, metad
                     })
                 end
 
-                -- Set animation flag to prevent double execution
                 isAnimating = true
 
                 local tempAlpha = 0
@@ -211,10 +208,8 @@ RegisterNetEvent('qb-graffiti:client:placeGraffiti', function(model, slot, metad
                     end
                 end)
 
-                -- Start spray animation
                 SprayingAnim()
 
-                -- Single progress bar for the entire spraying process
                 local progressCompleted = lib.progressBar({
                     duration = 8000,
                     label = 'Spraying with paint',
@@ -228,7 +223,6 @@ RegisterNetEvent('qb-graffiti:client:placeGraffiti', function(model, slot, metad
                     }
                 })
 
-                -- Clean up animation regardless of completion
                 StopAnimTask(ped, 'switch@franklin@lamar_tagging_wall', 'lamar_tagging_exit_loop_lamar', 1.0)
                 if sprayingParticle then
                     StopParticleFxLooped(sprayingParticle, true)
@@ -239,15 +233,12 @@ RegisterNetEvent('qb-graffiti:client:placeGraffiti', function(model, slot, metad
                     sprayingCan = nil
                 end
 
-                -- Reset animation flag
                 isAnimating = false
 
                 if progressCompleted then
-                    -- Send to server - server will handle success notification
                     TriggerServerEvent('qb-graffiti:client:addServerGraffiti', model, coords, rotation, slot, metadata)
                 end
 
-                -- Clean up temp object
                 DeleteObject(tempSpray)
             end
         end)
@@ -294,7 +285,6 @@ RegisterNetEvent('qb-graffiti:client:removeClosestGraffiti', function()
 
     local removalDetails = GetRemovalDetails(removalCheck.removalType, graffiti)
     
-    -- Start the removal process
     local success = lib.progressBar({
         duration = removalDetails.duration,
         label = removalDetails.label,
@@ -315,7 +305,6 @@ RegisterNetEvent('qb-graffiti:client:removeClosestGraffiti', function()
         }
     })
 
-    -- Clean up and complete
     if success then
         TriggerServerEvent('qb-graffiti:server:removeServerGraffitiByKey', graffiti.key, {
             removalType = removalCheck.removalType,
@@ -338,7 +327,6 @@ RegisterNetEvent('qb-graffiti:client:gangGraffitiRemoved', function(data)
         data.graffitiGang
     )
     
-    -- Add additional context if gang didn't have enough members
     if not data.hasEnoughMembers then
         message = message .. "\nYour gang didn't have enough active members to protect this territory!"
     end
