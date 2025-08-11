@@ -1,6 +1,6 @@
-# QBCore Graffiti System
+# Graffiti System
 
-An advanced graffiti & gang territory system for FiveM servers using **QBCore**, **ox_lib**, **ox_target**, and **ox_inventory**. Players can buy spray cans, place graffiti, claim territories for gangs, and remove enemy tags. Admins have full control over graffiti management.
+An advanced graffiti & gang territory system for FiveM servers using **Qbox**, **ox_lib**, **ox_target**, and **ox_inventory**. Players can buy spray cans, place graffiti, claim territories for gangs, and remove enemy tags. Admins have full control over graffiti management.
 
 ## ✨ Features
 
@@ -26,10 +26,13 @@ This script requires the following resources:
 ## ⚙️ Installation
 
 ### 1. Download & Install
-1. Download this resource and place it in your `resources/[qb]` folder
+1. Download this resource and place it in your `resources/[your-res]` folder
 2. Rename the folder to `graffiti` (if not already named)
 
-### 2. Server Configuration
+### 2. **Props**
+Take the spray-props folder and (In this script) put it under the other scripts
+
+### 3. Server Configuration
 Add the following to your `server.cfg`:
 
 ```cfg
@@ -41,7 +44,7 @@ ensure oxmysql
 ensure graffiti
 ```
 
-### 3. Database Setup
+### 4. Database Setup
 Import the following SQL table to your database:
 
 ```sql
@@ -55,7 +58,7 @@ CREATE TABLE `graffitis` (
 );
 ```
 
-### 4. Item Configuration
+### 5. Item Configuration
 Add the following items to your `ox_inventory/data/items.lua` or your item configuration:
 
 ```lua
